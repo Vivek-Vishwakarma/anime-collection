@@ -7,19 +7,22 @@ const app = express()
 const port = 3000
 var expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
+const bodyParser = require("body-parser")
 
 //router variables
 const indexRoute = require("./routes/index")
-
+const studioRoute = require("./routes/studio")
 
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.use(express.static('public'))
 app.set('layout', 'layouts/layout');
+app.use(bodyParser.urlencoded({ limit : "5mb" , extended : false}))
 
 
 //router use path
-app.use(indexRoute)
+app.use("/",indexRoute)
+app.use("/studio",studioRoute)
 
 //mongodb stuff
 mongoose.connect(process.env.DATABASE_URL, {
