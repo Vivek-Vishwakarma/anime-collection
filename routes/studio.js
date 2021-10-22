@@ -2,8 +2,18 @@ const express = require("express")
 const router = express.Router()
 const Studio = require("../models/studioModel")
 //all studio
-router.get('/', (req, res) => {
-    res.render("studio/index")
+router.get('/', async (req, res) => {
+    let search = {}
+    if(req.query.name != null && req.query.name !== ""){
+        search.name = new RegExp(req.query.name , "i")
+    }
+    try {
+        const studio = await Studio.find({})
+        res.render("studio/index", {studio : studio, search : req.query})   
+        
+    } catch {
+        res.redirect("/")
+    }
 })
 //new studio
 router.get('/new', (req, res) => {
