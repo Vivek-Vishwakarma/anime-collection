@@ -12,17 +12,21 @@ const bodyParser = require("body-parser")
 //router variables
 const indexRoute = require("./routes/index")
 const studioRoute = require("./routes/studio")
+const animeRoute = require("./routes/anime")
+
 
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.use(express.static('public'))
 app.set('layout', 'layouts/layout');
-app.use(bodyParser.urlencoded({ limit : "5mb" , extended : false}))
+app.use(bodyParser.urlencoded({ limit : "10mb" , extended : false}))
 
 
 //router use path
 app.use("/",indexRoute)
 app.use("/studio",studioRoute)
+app.use("/anime",animeRoute)
+
 
 //mongodb stuff
 mongoose.connect(process.env.DATABASE_URL, {

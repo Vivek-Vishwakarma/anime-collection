@@ -1,0 +1,40 @@
+<div class="mb-3">
+  <label class="form-label">Title :</label>
+  <input
+    type="text"
+    class="form-control"
+    name="title"
+    value="<%= anime.title %>"
+  />
+  <label class="form-label">Studio :</label>
+  <select name="studio">
+    <% studios.forEach((studio)=> {if(studio.id==anime.studio){%>
+    <option
+      selected
+      label="<%= studio.name %>"
+      value="<%= studio.id %> "
+    ></option>
+    <% } else { %>
+    <option label="<%= studio.name %>" value="<%= studio.id %> "></option>
+    <% }}) %>
+  </select>
+
+  <br />
+  <label class="form-label">Release Date :</label>
+  <input type="date" class="form-control" name="releaseDate" value="<%=
+  anime.releaseDate == null ? "" : anime.releaseDate.toISOString().split(" T")
+  %>"/>
+  <br />
+  <label class="form-label">Episode Count :</label>
+  <input
+    type="number"
+    class="form-control"
+    min="1"
+    name="epCount"
+    value="<%= anime.epCount%>"
+  />
+  <br />
+  <label class="form-label">Description :</label>
+  <br />
+  <textarea name="desc" cols="30" rows="10"><%= anime.desc %></textarea>
+</div>
